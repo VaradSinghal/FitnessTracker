@@ -1,0 +1,31 @@
+frontend/
+├── lib/
+│   ├── config/                 # Configuration files
+│   │   └── api_config.dart     # API base URL, endpoints, headers
+│   ├── models/                 # Data models for fitness data
+│   │   ├── user.dart           # User model (ID, name, email)
+│   │   ├── step_data.dart      # Step count data (date, steps)
+│   │   └── workout.dart        # Workout data (type, duration, distance)
+│   ├── screens/                # UI screens
+│   │   ├── dashboard_screen.dart  # Main dashboard (steps, stats)
+│   │   ├── workout_screen.dart    # Workout logger
+│   │   ├── history_screen.dart    # Past fitness data
+│   │   └── settings_screen.dart   # User settings/goals
+│   ├── widgets/                # Reusable UI components
+│   │   ├── step_counter.dart   # Circular step progress widget
+│   │   ├── stat_card.dart      # Dashboard stat cards
+│   │   └── workout_form.dart   # Form for manual workout entry
+│   ├── services/               # API and device services
+│   │   ├── api_service.dart    # HTTP requests to backend
+│   │   ├── pedometer_service.dart  # Step tracking logic
+│   │   └── geolocation_service.dart  # Distance tracking
+│   ├── providers/              # State management
+│   │   └── fitness_provider.dart  # Manages steps, workouts, user data
+│   └── main.dart               # App entry point
+├── assets/                     # Static assets
+│   ├── images/                 # Icons, backgrounds
+│   └── fonts/                  # Custom fonts (optional)
+├── test/                       # Unit tests
+│   └── widget_test.dart
+├── pubspec.yaml                # Dependencies (http, provider, etc.)
+└── README.md                   # Frontend-specific notes

@@ -1,0 +1,22 @@
+backend/
+├── config/
+│   └── db.js              # MongoDB connection setup
+├── models/                # Mongoose schemas
+│   ├── User.js            # User schema (ID, email, password)
+│   ├── StepData.js        # Step data schema (userId, date, steps)
+│   └── Workout.js         # Workout schema (userId, type, duration, distance)
+├── routes/                # API endpoints
+│   ├── auth.js            # Login, register
+│   ├── steps.js           # Step data CRUD
+│   └── workouts.js        # Workout data CRUD
+├── middleware/            # Custom middleware
+│   └── auth.js            # JWT authentication
+├── controllers/           # Business logic
+│   ├── authController.js  # Handle auth logic
+│   ├── stepController.js  # Step data operations
+│   └── workoutController.js  # Workout operations
+├── node_modules/          # Installed dependencies
+├── .env                   # Environment variables (MongoDB URI, JWT secret)
+├── server.js              # Main server file
+├── package.json           # Node.js dependencies
+└── README.md              # Backend-specific notes
