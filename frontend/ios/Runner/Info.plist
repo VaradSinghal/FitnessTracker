@@ -45,5 +45,16 @@
 	<true/>
 	<key>UIApplicationSupportsIndirectInputEvents</key>
 	<true/>
+
+	<!-- Permissions for geolocation, motion activity, and network access -->
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>App requires access to your location for tracking your workouts and routes.</string>
+	<key>NSMotionUsageDescription</key>
+	<string>App needs motion data to calculate your steps and distance.</string>
+	<key>NSAppTransportSecurity</key>
+	<dict>
+		<key>NSAllowsArbitraryLoads</key>
+		<true/>
+	</dict>
 </dict>
 </plist>
