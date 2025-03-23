@@ -73,4 +73,13 @@ class FitnessProvider with ChangeNotifier {
     notifyListeners();
     return distance;
   }
+
+  void reset() {
+    _steps = 0;
+    _stepHistory = [];
+    _workouts = [];
+    _token = null;
+    _stepGoal = 10000;
+    notifyListeners();
+  }
 }

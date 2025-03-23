@@ -22,7 +22,10 @@ class _RegisterScreenState extends State<RegisterScreen> {
         _passwordController.text,
         _nameController.text,
       );
+      print('Register token: $token');
       await _storage.write(key: 'token', value: token);
+      final storedToken = await _storage.read(key: 'token');
+      print('Stored token after register: $storedToken');
       Navigator.pushReplacement(
         context,
         MaterialPageRoute(builder: (context) => DashboardScreen(token: token)),

@@ -13,7 +13,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
   @override
   void initState() {
     super.initState();
-    _goalController.text = Provider.of<FitnessProvider>(context, listen: false).stepGoal.toString();
+    final provider = Provider.of<FitnessProvider>(context, listen: false);
+    _goalController.text = provider.stepGoal.toString();
   }
 
   void _saveSettings(FitnessProvider provider) {
@@ -23,6 +24,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final provider = Provider.of<FitnessProvider>(context);
     return Scaffold(
       appBar: AppBar(
         title: Text('Settings', style: TextStyle(fontWeight: FontWeight.bold)),
@@ -46,7 +48,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
             SizedBox(height: 20),
             Center(
               child: ElevatedButton.icon(
-                onPressed: () => _saveSettings(context.read<FitnessProvider>()),
+                onPressed: () => _saveSettings(provider),
                 icon: Icon(Icons.save),
                 label: Text('Save'),
                 style: ElevatedButton.styleFrom(backgroundColor: Colors.blueAccent, padding: EdgeInsets.symmetric(horizontal: 20, vertical: 12)),
