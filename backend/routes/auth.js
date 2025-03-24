@@ -1,10 +1,9 @@
 const express = require('express');
 const router = express.Router();
-const { register, login, logout, tokenBlacklist } = require('../controllers/authController');
+const { register, login, logout, tokenBlacklist } = require('../controllers/auth');
 
 router.post('/register', register);
 router.post('/login', login);
 router.post('/logout', logout);
 
-module.exports = router;
-module.exports.tokenBlacklist = tokenBlacklist;
+module.exports = router, tokenBlacklist;

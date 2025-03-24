@@ -7,7 +7,7 @@ import '../models/workout.dart';
 
 class FitnessProvider with ChangeNotifier {
   final ApiService _apiService = ApiService();
-  final PedometerService _pedometerService = PedometerService();
+  late PedometerService _pedometerService;
   final GeolocationService _geolocationService = GeolocationService();
   int _steps = 0;
   List<StepData> _stepHistory = [];
@@ -22,10 +22,13 @@ class FitnessProvider with ChangeNotifier {
   double get currentDistance => _geolocationService.currentDistance;
 
   FitnessProvider(String token) {
-    _token = token;
-    _initPedometer();
-    fetchSteps(1, 10);
-    fetchWorkouts(1, 10);
+    _token = token.isNotEmpty ? token : null;
+    if (_token != null) {
+      _pedometerService = PedometerService(_token!);
+      _initPedometer();
+      fetchSteps(1, 10);
+      fetchWorkouts(1, 10);
+    }
   }
 
   void _initPedometer() {
@@ -50,8 +53,12 @@ class FitnessProvider with ChangeNotifier {
 
   Future<void> addWorkout(Workout workout) async {
     if (_token != null) {
+     
       await _apiService.addWorkout(_token!, workout);
-      fetchWorkouts(1, 10);
+      
+      await fetchWorkouts(1, 10);
+    } else {
+      
     }
   }
 

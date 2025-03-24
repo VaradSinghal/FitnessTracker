@@ -1,17 +1,17 @@
 class Workout {
-  final String id;
+  final String? id;
   final String type;
   final int duration;
-  final double? distance;
   final int? calories;
+  final double? distance;
   final DateTime date;
 
   Workout({
-    required this.id,
+    this.id,
     required this.type,
     required this.duration,
-    this.distance,
     this.calories,
+    this.distance,
     required this.date,
   });
 
@@ -20,16 +20,20 @@ class Workout {
       id: json['_id'],
       type: json['type'],
       duration: json['duration'],
-      distance: json['distance']?.toDouble(),
       calories: json['calories'],
+      distance: json['distance']?.toDouble(),
       date: DateTime.parse(json['date']),
     );
   }
 
-  Map<String, dynamic> toJson() => {
-        'type': type,
-        'duration': duration,
-        'distance': distance,
-        'calories': calories,
-      };
+  Map<String, dynamic> toJson() {
+    return {
+      if (id != null) '_id': id,
+      'type': type,
+      'duration': duration,
+      if (calories != null) 'calories': calories,
+      if (distance != null) 'distance': distance,
+      'date': date.toIso8601String(),
+    };
+  }
 }

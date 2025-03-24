@@ -21,15 +21,14 @@ class DashboardScreen extends StatelessWidget {
     try {
       await apiService.logout(token);
     } catch (e) {
-      print('Backend logout failed: $e');
+     
     } finally {
-      // Always clear the token, even if backend logout fails
+     
       await storage.delete(key: 'token');
       final storedToken = await storage.read(key: 'token');
-      print('Token after logout: $storedToken');
-      // Reset FitnessProvider state
+      
       final provider = Provider.of<FitnessProvider>(context, listen: false);
-      provider.reset();
+     
       // Navigate to LoginScreen
       Navigator.pushReplacement(
         context,

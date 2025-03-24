@@ -1,11 +1,11 @@
 const mongoose = require('mongoose');
 
 const workoutSchema = new mongoose.Schema({
-  userId: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
-  type: { type: String, required: true }, // e.g., "Running", "Cycling"
-  duration: { type: Number, required: true }, // in minutes
-  distance: { type: Number }, // in kilometers
-  calories: { type: Number }, // optional, calculated
+  user: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
+  type: { type: String, required: true },
+  duration: { type: Number, required: true },
+  calories: { type: Number },
+  distance: { type: Number },
   date: { type: Date, default: Date.now },
 });
 

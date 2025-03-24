@@ -2,9 +2,7 @@ const User = require('../models/User');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 require('dotenv').config();
-
-// In-memory blacklist for invalidated tokens (use a database in production)
-const tokenBlacklist = [];
+const tokenBlacklist = require('../utils/tokenBlacklist');
 
 exports.register = async (req, res) => {
   const { email, password, name } = req.body;
@@ -42,10 +40,8 @@ exports.logout = (req, res) => {
   const token = req.header('x-auth-token');
   if (!token) return res.status(400).json({ message: 'No token provided' });
 
-  // Add token to blacklist
   tokenBlacklist.push(token);
   res.json({ message: 'Logged out successfully' });
 };
 
-// Export the blacklist for use in middleware
 exports.tokenBlacklist = tokenBlacklist;

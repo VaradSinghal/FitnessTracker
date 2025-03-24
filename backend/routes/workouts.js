@@ -1,9 +1,8 @@
 const express = require('express');
 const router = express.Router();
-const auth = require('../middleware/auth');
-const { addWorkout, getWorkouts } = require('../controllers/workoutController');
+const workoutsController = require('../controllers/workouts'); // Import the controller
 
-router.post('/', auth, addWorkout);
-router.get('/', auth, getWorkouts);
+router.post('/workouts', workoutsController.addWorkout); // Ensure this is correct
+router.get('/workouts', workoutsController.getWorkouts);
 
 module.exports = router;

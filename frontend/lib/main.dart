@@ -9,7 +9,7 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   final storage = FlutterSecureStorage();
   final token = await storage.read(key: 'token');
-  print('Initial token on app start: $token');
+  
   runApp(MyApp(initialToken: token));
 }
 
@@ -20,19 +20,13 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return initialToken != null
-        ? ChangeNotifierProvider(
-            create: (_) => FitnessProvider(initialToken!),
-            child: MaterialApp(
-              title: 'Fitness Tracker',
-              theme: ThemeData(primarySwatch: Colors.blue),
-              home: DashboardScreen(token: initialToken!),
-            ),
-          )
-        : MaterialApp(
-            title: 'Fitness Tracker',
-            theme: ThemeData(primarySwatch: Colors.blue),
-            home: LoginScreen(),
-          );
+    return ChangeNotifierProvider(
+      create: (_) => FitnessProvider(initialToken ?? ''),
+      child: MaterialApp(
+        title: 'Fitness Tracker',
+        theme: ThemeData(primarySwatch: Colors.blue),
+        home: initialToken != null ? DashboardScreen(token: initialToken!) : LoginScreen(),
+      ),
+    );
   }
 }

@@ -1,20 +1,22 @@
 const jwt = require('jsonwebtoken');
-const { tokenBlacklist } = require('../routes/auth');
+const User = require('../models/User');
 
-module.exports = function (req, res, next) {
-  const token = req.header('x-auth-token');
-  if (!token) return res.status(401).json({ msg: 'No token, authorization denied' });
-
-  // Check if token is blacklisted
-  if (tokenBlacklist.includes(token)) {
-    return res.status(401).json({ msg: 'Token has been invalidated' });
-  }
-
+const auth = async (req, res, next) => {
   try {
+    const token = req.header('Authorization').replace('Bearer ', '');
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
-    req.user = decoded;
+    const user = await User.findOne({ _id: decoded.id, 'tokens.token': token });
+
+    if (!user) {
+      throw new Error();
+    }
+
+    req.user = user;
+    req.token = token;
     next();
   } catch (err) {
-    res.status(401).json({ msg: 'Token is not valid' });
+    res.status(401).json({ message: 'Please authenticate' });
   }
 };
+
+module.exports = auth;

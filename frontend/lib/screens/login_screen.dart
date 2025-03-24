@@ -21,10 +21,10 @@ class _LoginScreenState extends State<LoginScreen> {
         _emailController.text,
         _passwordController.text,
       );
-      print('Login token: $token');
+      
       await _storage.write(key: 'token', value: token);
       final storedToken = await _storage.read(key: 'token');
-      print('Stored token after login: $storedToken');
+     
       Navigator.pushReplacement(
         context,
         MaterialPageRoute(builder: (context) => DashboardScreen(token: token)),
